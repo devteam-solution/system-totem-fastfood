@@ -43,6 +43,13 @@
   justify-content: center;
   position: relative;
   backdrop-filter: blur(8px);
+  cursor: pointer;
+  outline: none;
+}
+
+.cart-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .cart-badge {
@@ -247,4 +254,153 @@
 .products-grid::-webkit-scrollbar-thumb {
   background: rgba(207, 32, 39, 0.8);
   border-radius: 999px;
+}
+@media (max-width: 768px) {
+  .menu-screen {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .menu-header {
+    height: auto;
+    padding: 16px;
+  }
+
+  .menu-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .cart-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu-content {
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px 16px;
+  }
+
+  .menu-sidebar {
+    width: 100%;
+    border-radius: 22px;
+    padding: 16px 14px;
+    gap: 10px;
+  }
+
+  .category-btn {
+    padding: 14px 14px;
+    font-size: 0.95rem;
+    border-radius: 14px;
+  }
+
+  .menu-products {
+    gap: 14px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-right: 0;
+  }
+
+  .product-card {
+    min-height: auto;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .product-image-area {
+    height: 150px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .product-image {
+    width: 180px;
+    height: 140px;
+  }
+
+  .product-card h3 {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 0.95rem;
+  }
+
+  .quantity-controls button {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .confirm-area {
+    padding-bottom: 8px;
+  }
+
+  .confirm-button {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-header {
+    padding: 12px;
+  }
+
+  .menu-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .cart-button {
+    width: 46px;
+    height: 46px;
+  }
+
+  .menu-content {
+    padding: 0 12px 12px;
+    gap: 12px;
+  }
+
+  .menu-sidebar {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .category-btn {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .product-card {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .product-image-area {
+    height: 130px;
+    margin-bottom: 12px;
+  }
+
+  .product-image {
+    width: 150px;
+    height: 115px;
+  }
+
+  .product-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .price {
+    font-size: 0.85rem;
+  }
+
+  .confirm-button {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    border-radius: 16px;
+  }
 }

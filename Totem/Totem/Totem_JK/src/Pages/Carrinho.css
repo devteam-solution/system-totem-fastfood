@@ -391,3 +391,179 @@
   background: #fff;
   padding: 10px;
 }
+
+@media (max-width: 768px) {
+  .carrinho-screen {
+    padding: 16px;
+  }
+
+  .carrinho-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .carrinho-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .voltar-btn {
+    width: 100%;
+  }
+
+  .carrinho-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .item-card {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .item-info h2 {
+    font-size: 1.1rem;
+  }
+
+  .descricao {
+    font-size: 0.95rem;
+  }
+
+  .item-actions {
+    width: 100%;
+  }
+
+  .item-imagem {
+    width: 100%;
+    max-width: 220px;
+    height: 150px;
+  }
+
+  .contador {
+    gap: 10px;
+  }
+
+  .contador button {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .resumo-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .resumo-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .resumo-imagem {
+    height: 160px;
+  }
+
+  .total-box {
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
+
+  .total-box strong {
+    font-size: 1.15rem;
+  }
+
+  .select-payment-btn,
+  .confirmar-btn,
+  .imprimir-btn,
+  .nova-venda-btn {
+    width: 100%;
+  }
+
+  .nota-botoes {
+    flex-direction: column;
+  }
+
+  .modal-pagamento,
+  .nota-fiscal,
+  .nota-box {
+    width: 100%;
+    max-width: 95%;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .fake-qr {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrinho-screen {
+    padding: 12px;
+  }
+
+  .carrinho-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .item-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .item-info h2 {
+    font-size: 1rem;
+  }
+
+  .descricao,
+  .preco-unitario,
+  .subtotal {
+    font-size: 0.9rem;
+  }
+
+  .item-imagem {
+    max-width: 180px;
+    height: 125px;
+  }
+
+  .remover-btn {
+    width: 100%;
+  }
+
+  .resumo-card {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .resumo-imagem {
+    height: 140px;
+  }
+
+  .payment-option {
+    padding: 10px 12px;
+  }
+
+  .modal-pagamento,
+  .nota-fiscal,
+  .nota-box {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .fake-qr {
+    width: 130px;
+    height: 130px;
+  }
+
+  .nota-topo h3 {
+    font-size: 1.1rem;
+  }
+
+  .nota-topo p,
+  .nota-item-texto small,
+  .nota-sorteio p {
+    font-size: 0.82rem;
+  }
+}

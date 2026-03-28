@@ -121,3 +121,88 @@
   border: 2px solid #fff6e5;
   color: #fff6e5;
 }
+
+@media (max-width: 768px) {
+  .cpf-screen {
+    padding: 16px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .cpf-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .cpf-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .cpf-container p {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .cpf-input {
+    padding: 14px;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+
+  .teclado-grid {
+    gap: 10px;
+  }
+
+  .tecla {
+    padding: 14px 0;
+    font-size: 1.1rem;
+    border-radius: 14px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .confirmar,
+  .pular {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cpf-screen {
+    padding: 12px;
+  }
+
+  .cpf-container {
+    padding: 20px 14px;
+  }
+
+  .cpf-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .cpf-container p {
+    font-size: 0.9rem;
+  }
+
+  .cpf-input {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .teclado-grid {
+    gap: 8px;
+  }
+
+  .tecla {
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 12px;
+  }
+}

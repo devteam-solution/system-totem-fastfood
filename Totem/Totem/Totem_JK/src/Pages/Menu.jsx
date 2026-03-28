@@ -140,10 +140,14 @@ export default function Menu() {
       <header className="menu-header">
         <h1>Menu</h1>
 
-        <div className="cart-button">
+        <button
+          className="cart-button"
+          onClick={confirmarPedido}
+          disabled={totalItens === 0}
+        >
           <ShoppingCart size={24} />
           {totalItens > 0 && <span className="cart-badge">{totalItens}</span>}
-        </div>
+        </button>
       </header>
 
       <main className="menu-content">

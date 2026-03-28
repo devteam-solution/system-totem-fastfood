@@ -88,3 +88,42 @@ html, body, #root {
   color: #fff7d6;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
 }
+
+@media (max-width: 768px) {
+  .mirror-side {
+    filter: blur(8px) brightness(0.45);
+  }
+
+  .main-img {
+    width: 100%;
+    height: auto;
+    max-height: 100vh;
+  }
+
+  .home-overlay {
+    bottom: 24px;
+    padding: 0 16px;
+  }
+
+  .start-button {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 24px;
+    font-size: 1.2rem;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-overlay {
+    bottom: 18px;
+    padding: 0 12px;
+  }
+
+  .start-button {
+    max-width: 280px;
+    padding: 14px 20px;
+    font-size: 1rem;
+    border-radius: 14px;
+  }
+}

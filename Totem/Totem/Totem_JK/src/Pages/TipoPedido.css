@@ -75,3 +75,84 @@
   font-size: 1rem;
   color: #fff0cf;
 }
+
+@media (max-width: 768px) {
+  .tipo-screen {
+    padding: 16px;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .tipo-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tipo-container h1 {
+    font-size: 2rem;
+  }
+
+  .tipo-container p {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .tipo-cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .tipo-card {
+    padding: 20px 16px;
+    border-radius: 22px;
+  }
+
+  .tipo-img-box {
+    height: 180px;
+    margin-bottom: 16px;
+  }
+
+  .tipo-img-box img {
+    max-height: 160px;
+    border-radius: 18px;
+  }
+
+  .tipo-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .tipo-card span {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tipo-screen {
+    padding: 12px;
+  }
+
+  .tipo-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .tipo-container p {
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+
+  .tipo-card {
+    padding: 16px 12px;
+  }
+
+  .tipo-img-box {
+    height: 150px;
+  }
+
+  .tipo-img-box img {
+    max-height: 135px;
+  }
+
+  .tipo-card h2 {
+    font-size: 1.3rem;
+  }
+}
