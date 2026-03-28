@@ -1,9 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .menu-screen {
+  width: 100vw;
   height: 100vh;
+  background: linear-gradient(180deg, #ffbc0d 0%, #e23b1d 52%, #b31317 100%);
+  color: #fff6e5;
+  font-family: "Fredoka", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.menu-header {
+  height: 92px;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-header h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+/* CARRINHO */
+
+.cart-button {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 246, 229, 0.16);
+  border: 2px solid rgba(255, 246, 229, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  position: relative;
+  backdrop-filter: blur(8px);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #cf2027;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LAYOUT */
+
+.menu-content {
+  flex: 1;
+  display: flex;
+  gap: 24px;
+  padding: 0 24px 24px;
+  min-height: 0;
+}
+
+/* SIDEBAR */
+
+.menu-sidebar {
+  width: 280px;
+  background: rgba(255, 248, 235, 0.12);
+  border: 1px solid rgba(255, 246, 229, 0.15);
+  border-radius: 28px;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  backdrop-filter: blur(8px);
+}
+
+.category-btn {
+  border: none;
+  border-radius: 18px;
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff6e5;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.category-btn:hover {
+  background: rgba(255, 246, 229, 0.1);
+}
+
+.category-btn.active {
+  background: #cf2027;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* PRODUTOS */
+
+.menu-products {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* GRID 2x2 */
+
+.products-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3,500px);
+  gap: 18px;
+  overflow-y: auto;
+  align-content: start;
+  padding-right: 6px;
+}
+
+/* CARD */
+
+.product-card {
+  background: rgba(255, 248, 235, 0.16);
+  border: 1px solid rgba(255, 246, 229, 0.22);
+  border-radius: 24px;
+  padding: 16px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  position: relative;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGEM */
+
+.product-image-area {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  margin-top: 15px;
+}
+
+.product-image {
+  width: 260px;
+  height: 205px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 246, 229, 0.55);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.18);
+  padding: 2px;
+}
+
+/* TEXTO */
+
+.product-card h3 {
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffdf7b;
+  margin-top: 4px;
+}
+
+/* CONTROLE */
+
+.quantity-controls {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity-controls button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #cf2027;
+  color: #fff;
+  font-size: 1.2rem;
   font-weight: bold;
-  background: #fff4cc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.quantity-controls button:hover {
+  transform: scale(1.1);
+}
+
+.quantity-controls span {
+  font-weight: bold;
+}
+
+/* BOTÃO FINAL */
+
+.confirm-area {
+  display: flex;
+  justify-content: center;
+}
+
+.confirm-button {
+  border: none;
+  border-radius: 20px;
+  padding: 18px 34px;
+  background: #ffbc0d;
+  color: #3b1f00;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transition: 0.2s;
+}
+
+.confirm-button:hover {
+  transform: translateY(-2px);
+}
+
+/* SCROLL */
+
+.products-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.products-grid::-webkit-scrollbar-thumb {
+  background: rgba(207, 32, 39, 0.8);
+  border-radius: 999px;
 }
