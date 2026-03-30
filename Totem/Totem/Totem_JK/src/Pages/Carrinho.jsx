@@ -13,9 +13,12 @@ export default function Carrinho() {
     const [mostrarPagamento, setMostrarPagamento] = useState(false);
     const [mostrarModalPagamento, setMostrarModalPagamento] = useState(false);
     const [mostrarNota, setMostrarNota] = useState(false);
+    const [pedidoCriado, setPedidoCriado] = useState(null);
+
     const tipoPedido = localStorage.getItem("tipoPedido") || "Não informado";
     const cpfCliente = localStorage.getItem("cpf") || "";
-    const pontosGanhos = cpfCliente ? 10000 : 0;
+    const nomeCliente = localStorage.getItem("nomeCliente") || "Cliente";
+    const pontosAntes = Number(localStorage.getItem("pontos") || 0);
 
     const numeroPedido = useMemo(() => {
         return Math.floor(100000 + Math.random() * 900000);
@@ -66,10 +69,46 @@ export default function Carrinho() {
         return itens.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
     }, [itens]);
 
-    function confirmarPagamento() {
+    const totalOficial = pedidoCriado?.total ?? total;
+    const pontosGanhos = Math.floor(Number(totalOficial) || 0);
+    const pontosAtualizados = pontosAntes + pontosGanhos;
+
+    async function confirmarPagamento() {
         if (itens.length === 0) return;
         if (!pagamentoSelecionado) return;
-        setMostrarModalPagamento(true);
+
+        try {
+            const body = {
+                cpf: cpfCliente || null,
+                itens: itens.map((item) => ({
+                    produtoId: item.id,
+                    quantidade: item.quantidade,
+                })),
+            };
+
+            const response = await fetch("http://localhost:8080/pedidos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro ao criar pedido");
+            }
+
+            const data = await response.json();
+            setPedidoCriado(data);
+
+            if (cpfCliente) {
+                localStorage.setItem("pontos", String(pontosAtualizados));
+            }
+
+            setMostrarModalPagamento(true);
+        } catch (error) {
+            console.error("Erro ao criar pedido:", error);
+        }
     }
 
     function finalizarVenda() {
@@ -79,6 +118,8 @@ export default function Carrinho() {
 
     function novaVenda() {
         localStorage.removeItem("cpf");
+        localStorage.removeItem("nomeCliente");
+        localStorage.removeItem("pontos");
         localStorage.removeItem("tipoPedido");
         navigate("/");
     }
@@ -146,7 +187,7 @@ export default function Carrinho() {
 
                     <div className="total-box">
                         <span>Total</span>
-                        <strong>R$ {total.toFixed(2).replace(".", ",")}</strong>
+                        <strong>R$ {Number(totalOficial).toFixed(2).replace(".", ",")}</strong>
                     </div>
 
                     <button
@@ -212,7 +253,7 @@ export default function Carrinho() {
                                 <div className="qr-code-box">
                                     <img
                                         src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(
-                                            `JK Burguer Pedido:${numeroPedido} Total:${total}`
+                                            `JK Burguer Pedido:${pedidoCriado?.id || numeroPedido} Total:${totalOficial}`
                                         )}`}
                                         alt="QR Code"
                                     />
@@ -246,12 +287,15 @@ export default function Carrinho() {
                             <div className="nota-topo">
                                 <h3>JK Burguer</h3>
                                 <p>CNPJ: 12.345.678/0001-99</p>
-                                <p>Pedido nº: {numeroPedido}</p>
+                                <p>Pedido nº: {pedidoCriado?.id || numeroPedido}</p>
                                 <p>Data: {dataAtual.data}</p>
                                 <p>Horário: {dataAtual.hora}</p>
                                 <p>Tipo de pedido: {tipoPedido}</p>
+                                {cpfCliente && <p>Cliente: {nomeCliente}</p>}
                                 {cpfCliente && <p>CPF: {cpfCliente}</p>}
-                                {cpfCliente && <p className="pontos-info">+ {pontosGanhos} pontos no app</p>}
+                                {cpfCliente && <p className="pontos-info">Pontos anteriores: {pontosAntes}</p>}
+                                {cpfCliente && <p className="pontos-info">Pontos ganhos: {pontosGanhos}</p>}
+                                {cpfCliente && <p className="pontos-info">Total de pontos: {pontosAtualizados}</p>}
                             </div>
 
                             <div className="nota-lista">
@@ -273,7 +317,7 @@ export default function Carrinho() {
 
                             <div className="nota-total">
                                 <span>Total</span>
-                                <strong>R$ {total.toFixed(2).replace(".", ",")}</strong>
+                                <strong>R$ {Number(totalOficial).toFixed(2).replace(".", ",")}</strong>
                             </div>
 
                             <div className="nota-sorteio">
@@ -283,7 +327,7 @@ export default function Carrinho() {
                                 <div className="qr-code-box nota-qr">
                                     <img
                                         src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(
-                                            `JK Burguer Pedido:${numeroPedido} Total:${total}`
+                                            `JK Burguer Pedido:${pedidoCriado?.id || numeroPedido} Total:${totalOficial}`
                                         )}`}
                                         alt="QR Code"
                                     />

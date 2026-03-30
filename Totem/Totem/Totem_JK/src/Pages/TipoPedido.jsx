@@ -7,6 +7,7 @@ import localImg from "../assets/Image/levar.png";
 
 export default function TipoPedido() {
   const navigate = useNavigate();
+  const nomeCliente = localStorage.getItem("nomeCliente");
 
   function selecionarTipo(tipo) {
     localStorage.setItem("tipoPedido", tipo);
@@ -20,7 +21,11 @@ export default function TipoPedido() {
       animate={{ opacity: 1 }}
     >
       <div className="tipo-container">
-        <h1>Como deseja seu pedido?</h1>
+        <h1>
+          {nomeCliente && nomeCliente !== "Cliente"
+            ? `Seja bem-vindo, ${nomeCliente}`
+            : "Seja bem-vindo"}
+        </h1>
         <p>Escolha uma opção para continuar</p>
 
         <div className="tipo-cards">

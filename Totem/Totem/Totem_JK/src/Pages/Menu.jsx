@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./Menu.css";
+
 import comboGorila from "../assets/Image/ComboGorila.png";
 import comboJK from "../assets/Image/ComboJK.png";
 import comboPadrao from "../assets/Image/Combo.png";
@@ -34,7 +35,6 @@ import sobremesa3 from "../assets/Image/brownie.png";
 import sobremesa4 from "../assets/Image/torta.png";
 import sobremesa5 from "../assets/Image/donuts.png";
 
-
 const categorias = [
   "Combos Mata Fome",
   "Hambúrgueres",
@@ -43,46 +43,38 @@ const categorias = [
   "Sobremesas",
 ];
 
-const produtos = {
-  "Combos Mata Fome": [
-    { id: 1, nome: "Combo Gorila", preco: 59.9, imagem: comboGorila },
-    { id: 2, nome: "Combo JK", preco: 34.9, imagem: comboJK },
-    { id: 3, nome: "Combo orangotango", preco: 39.9, imagem: comboPadrao },
-    { id: 4, nome: "Combo Mico", preco: 42.9, imagem: comboMico },
-    { id: 5, nome: "Combo Sagui", preco: 39.9, imagem: comboSagui },
-    { id: 6, nome: "Combo Kids", preco: 42.9, imagem: combokids },
-  ],
-  "Hambúrgueres": [
-    { id: 7, nome: "JK Smash", preco: 22.9, imagem: burger1 },
-    { id: 8, nome: "Sagui Burguer", preco: 24.9, imagem: burger2 },
-    { id: 9, nome: "Gorila Burguer", preco: 21.9, imagem: burger3 },
-    { id: 10, nome: "Mico Burguer", preco: 21.9, imagem: burger4 },
-    { id: 11, nome: "orangotango Burguer", preco: 21.9, imagem: burger5 },
-    { id: 12, nome: "Cheddar Burguer", preco: 21.9, imagem: burger6 },
-  ],
-  Refrigerantes: [
-    { id: 13, nome: "Coca-Cola 500ml", preco: 7.9, imagem: refri },
-    { id: 14, nome: "Guaraná 500ml", preco: 6.9, imagem: refri2 },
-    { id: 15, nome: "Fanta Laranja", preco: 6.9, imagem: refri3 },
-    { id: 16, nome: "Sprite", preco: 6.9, imagem: refri4 },
-    { id: 17, nome: "Coca Zero", preco: 7.9, imagem: refri },
-    { id: 18, nome: "Suco Del Valle Uva", preco: 8.9, imagem: refri5 },
-  ],
+const imagensProdutos = {
+  "Combo Gorila": comboGorila,
+  "Combo JK": comboJK,
+  "Combo orangotango": comboPadrao,
+  "Combo Mico": comboMico,
+  "Combo Sagui": comboSagui,
+  "Combo Kids": combokids,
 
-  Batata: [
-    { id: 19, nome: "Batata Pequena", preco: 8.9, imagem: batata },
-    { id: 20, nome: "Batata Média", preco: 10.9, imagem: batata3 },
-    { id: 21, nome: "Batata Grande", preco: 12.9, imagem: batata4 },
-    { id: 22, nome: "Batata com Cheddar", preco: 14.9, imagem: batata2 },
-  ],
+  "JK Smash": burger1,
+  "Sagui Burguer": burger2,
+  "Gorila Burguer": burger3,
+  "Mico Burguer": burger4,
+  "orangotango Burguer": burger5,
+  "Cheddar Burguer": burger6,
 
-  Sobremesas: [
-    { id: 23, nome: "Sorvete", preco: 6.9, imagem: sobremesa },
-    { id: 24, nome: "Milkshake", preco: 12.9, imagem: sobremesa2 },
-    { id: 25, nome: "Brownie", preco: 9.9, imagem: sobremesa3 },
-    { id: 26, nome: "Torta de Morango", preco: 10.9, imagem: sobremesa4 },
-    { id: 27, nome: "Donuts de pistache", preco: 7.9, imagem: sobremesa5 },
-  ],
+  "Coca-Cola 500ml": refri,
+  "Guaraná 500ml": refri2,
+  "Fanta Laranja": refri3,
+  "Sprite": refri4,
+  "Coca Zero": refri,
+  "Suco Del Valle Uva": refri5,
+
+  "Batata Pequena": batata,
+  "Batata Média": batata3,
+  "Batata Grande": batata4,
+  "Batata com Cheddar": batata2,
+
+  "Sorvete": sobremesa,
+  "Milkshake": sobremesa2,
+  "Brownie": sobremesa3,
+  "Torta de Morango": sobremesa4,
+  "Donuts de pistache": sobremesa5,
 };
 
 export default function Menu() {
@@ -90,10 +82,47 @@ export default function Menu() {
   const [categoriaAtiva, setCategoriaAtiva] = useState("Combos Mata Fome");
   const [quantidades, setQuantidades] = useState({});
   const [animandoCarrinho, setAnimandoCarrinho] = useState(null);
+  const [produtosApi, setProdutosApi] = useState([]);
+
+  useEffect(() => {
+    async function carregarProdutos() {
+      try {
+        const response = await fetch("http://localhost:8080/produtos");
+        const data = await response.json();
+        setProdutosApi(data);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    }
+
+    carregarProdutos();
+  }, []);
+
+  function mapearTipoParaCategoria(tipo) {
+    switch (tipo) {
+      case "COMBO":
+        return "Combos Mata Fome";
+      case "LANCHE":
+        return "Hambúrgueres";
+      case "BEBIDA":
+        return "Refrigerantes";
+      case "ACOMPANHAMENTO":
+        return "Batata";
+      case "SOBREMESA":
+        return "Sobremesas";
+      default:
+        return "";
+    }
+  }
 
   const itensCategoria = useMemo(() => {
-    return produtos[categoriaAtiva] || [];
-  }, [categoriaAtiva]);
+    return produtosApi
+      .filter((produto) => mapearTipoParaCategoria(produto.tipo) === categoriaAtiva)
+      .map((produto) => ({
+        ...produto,
+        imagem: imagensProdutos[produto.nome],
+      }));
+  }, [categoriaAtiva, produtosApi]);
 
   function aumentar(id) {
     setQuantidades((prev) => ({
@@ -112,21 +141,21 @@ export default function Menu() {
   }
 
   const totalItens = Object.values(quantidades).reduce((acc, qnt) => acc + qnt, 0);
+
   function confirmarPedido() {
     const itensSelecionados = [];
 
     Object.entries(quantidades).forEach(([id, quantidade]) => {
       if (quantidade > 0) {
-        for (const categoria in produtos) {
-          const produto = produtos[categoria].find((item) => item.id === Number(id));
-          if (produto) {
-            itensSelecionados.push({
-              ...produto,
-              quantidade,
-              categoria,
-            });
-            break;
-          }
+        const produto = produtosApi.find((item) => item.id === Number(id));
+
+        if (produto) {
+          itensSelecionados.push({
+            ...produto,
+            imagem: imagensProdutos[produto.nome],
+            quantidade,
+            categoria: mapearTipoParaCategoria(produto.tipo),
+          });
         }
       }
     });
@@ -135,6 +164,7 @@ export default function Menu() {
       state: { itens: itensSelecionados },
     });
   }
+
   return (
     <div className="menu-screen">
       <header className="menu-header">
@@ -174,11 +204,7 @@ export default function Menu() {
               transition={{ duration: 0.35 }}
             >
               {itensCategoria.map((produto) => (
-                <motion.div
-                  key={produto.id}
-                  className="product-card"
-                  layout
-                >
+                <motion.div key={produto.id} className="product-card" layout>
                   <div className="product-image-area">
                     <img src={produto.imagem} alt={produto.nome} className="product-image" />
 

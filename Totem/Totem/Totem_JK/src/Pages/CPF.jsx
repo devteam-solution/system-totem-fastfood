@@ -37,11 +37,38 @@ export default function CPF() {
     setCpf("");
   }
 
-  function confirmar() {
-    if (cpf.replace(/\D/g, "").length === 11) {
-      localStorage.setItem("cpf", cpf);
+  async function confirmar() {
+    const cpfLimpo = cpf.replace(/\D/g, "");
+
+    if (cpfLimpo.length === 11) {
+      try {
+        const response = await fetch("http://localhost:8080/clientes/cpf", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cpf: cpfLimpo }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Erro ao buscar cliente");
+        }
+
+        const cliente = await response.json();
+
+        localStorage.setItem("cpf", cliente.cpf);
+        localStorage.setItem("nomeCliente", cliente.nome || "Cliente");
+        localStorage.setItem("pontos", String(cliente.pontos ?? 0));
+      } catch (error) {
+        console.error("Erro ao buscar cliente:", error);
+        localStorage.removeItem("cpf");
+        localStorage.removeItem("nomeCliente");
+        localStorage.removeItem("pontos");
+      }
     } else {
       localStorage.removeItem("cpf");
+      localStorage.removeItem("nomeCliente");
+      localStorage.removeItem("pontos");
     }
 
     navigate("/tipo-pedido");
@@ -49,6 +76,8 @@ export default function CPF() {
 
   function pular() {
     localStorage.removeItem("cpf");
+    localStorage.removeItem("nomeCliente");
+    localStorage.removeItem("pontos");
     navigate("/tipo-pedido");
   }
 
