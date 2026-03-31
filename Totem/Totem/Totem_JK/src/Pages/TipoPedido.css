@@ -156,3 +156,25 @@
     font-size: 1.3rem;
   }
 }
+
+.tipo-container h1{
+  font-size: 80px;
+}
+
+.tipo-container p{
+  font-size: 50px;
+}
+
+
+
+
+.tipo-card h2 {
+  font-size: 40px; /* Aumenta o tamanho do título nos cartões */
+}
+
+.tipo-card span {
+  font-size: 40px; /* Aumenta o tamanho da descrição nos cartões */
+}
+
+
+

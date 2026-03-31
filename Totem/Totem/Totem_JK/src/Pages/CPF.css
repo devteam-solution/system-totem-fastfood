@@ -1,7 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html, body, #root {
+  width: 100%;
+  height: 100%;
 }
 
 .cpf-screen {
@@ -206,3 +205,35 @@
     border-radius: 12px;
   }
 }
+
+.cpf-container h1{
+  font-size: 60px;
+}
+
+.cpf-container p{
+  font-size: 40px;
+}
+
+.cpf-container span{
+  font-size: 30px;
+}
+
+.cpf-input{
+  font-size: 50px;
+}
+
+.tecla {
+  font-size: 50px; /* Aumenta o tamanho da fonte dentro das teclas */
+  /* Aumenta a altura das teclas */
+}
+
+.tecla-acao {
+  font-size: 40px; /* Aumenta o tamanho da fonte das teclas de ação */
+  /* Aumenta a altura das teclas de ação */
+}
+
+.buttons button {
+  font-size: 40px; /* Aumenta o tamanho da fonte dentro dos botões */
+  /* Arredonda os cantos do botão */
+}
+

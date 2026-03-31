@@ -28,6 +28,12 @@
 .menu-header h1 {
   font-size: 2.3rem;
   font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 /* CARRINHO */
@@ -97,7 +103,7 @@
   border-radius: 18px;
   padding: 16px 18px;
   text-align: left;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #fff6e5;
   background: transparent;
@@ -124,12 +130,12 @@
   gap: 18px;
 }
 
-/* GRID 2x2 */
+/* GRID 2x2 - 2 itens por coluna, empilhando um embaixo do outro */
 
 .products-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(3,500px);
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
   gap: 18px;
   overflow-y: auto;
   align-content: start;
@@ -151,6 +157,12 @@
   backdrop-filter: blur(10px);
   position: relative;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* REMOVENDO DESCRIÇÃO DO PRODUTO (Ingredientes, etc.) */
+
+.product-card .product-info-back {
+  display: none; /* Esconde a parte da descrição */
 }
 
 /* IMAGEM */
@@ -181,15 +193,16 @@
 /* TEXTO */
 
 .product-card h3 {
-  font-size: 0.95rem;
-  margin-top: 4px;
+  font-size: 1.4rem;
+  margin-top: -25px;
 }
 
 .price {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #ffdf7b;
   margin-top: 4px;
+  margin-bottom: 10px; /* Ajusta o espaçamento para o botão */
 }
 
 /* CONTROLE */
@@ -231,14 +244,17 @@
 
 .confirm-button {
   border: none;
-  border-radius: 20px;
-  padding: 18px 34px;
-  background: #ffbc0d;
+  border-radius: 25px;
+  padding: 18px 36px;
+  background: linear-gradient(145deg, #ffbc0d, #ffdd4d);
   color: #3b1f00;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-  transition: 0.2s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .confirm-button:hover {
@@ -255,152 +271,66 @@
   background: rgba(207, 32, 39, 0.8);
   border-radius: 999px;
 }
-@media (max-width: 768px) {
-  .menu-screen {
-    height: auto;
-    min-height: 100vh;
-  }
 
-  .menu-header {
-    height: auto;
-    padding: 16px;
-  }
+/* Desktop ajuste para preço e botão de adicionar na mesma linha */
 
-  .menu-header h1 {
-    font-size: 1.8rem;
-  }
-
-  .cart-button {
-    width: 50px;
-    height: 50px;
-  }
-
-  .menu-content {
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 16px 16px;
-  }
-
-  .menu-sidebar {
-    width: 100%;
-    border-radius: 22px;
-    padding: 16px 14px;
-    gap: 10px;
-  }
-
-  .category-btn {
-    padding: 14px 14px;
-    font-size: 0.95rem;
-    border-radius: 14px;
-  }
-
-  .menu-products {
-    gap: 14px;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding-right: 0;
-  }
-
+@media (min-width: 1200px) {
   .product-card {
-    min-height: auto;
-    padding: 14px;
-    border-radius: 20px;
+
+  padding: 24px;  /* Aumentando o padding dentro do card */
+  min-height: 450px;  /* Aumentando a altura mínima do card */
+
   }
 
-  .product-image-area {
-    height: 150px;
-    margin-top: 8px;
-    margin-bottom: 16px;
+  .price,
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: auto;
+    font-size: 40px;
   }
 
-  .product-image {
-    width: 180px;
-    height: 140px;
-  }
-
-  .product-card h3 {
-    font-size: 1rem;
-  }
-
-  .price {
-    font-size: 0.95rem;
-  }
-
-  .quantity-controls button {
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
-  }
-
-  .confirm-area {
-    padding-bottom: 8px;
-  }
+  
 
   .confirm-button {
     width: 100%;
-    padding: 16px 20px;
-    font-size: 1rem;
+    padding: 16px 24px;
+    font-size: 40px;
+
+  }
+
+   .product-card h3 {
+    font-size: 40px; /* Nome do produto bem maior para facilitar a leitura */
   }
 }
 
-@media (max-width: 480px) {
-  .menu-header {
-    padding: 12px;
-  }
+.category-btn {
+  padding: 20px 22px;
+  font-size: 33px; /* Aumentando o tamanho da fonte das opções no totem */
+  border-radius: 14px;
+}
 
-  .menu-header h1 {
-    font-size: 1.5rem;
-  }
 
-  .cart-button {
-    width: 46px;
-    height: 46px;
-  }
+.quantity-controls button {
+  width: 60px;  /* Aumentando o tamanho do botão de quantidade */
+  height: 60px;
+  font-size: 2rem; /* Aumentando a fonte dentro do botão */
+}
 
-  .menu-content {
-    padding: 0 12px 12px;
-    gap: 12px;
-  }
 
-  .menu-sidebar {
-    padding: 12px;
-    border-radius: 18px;
-  }
+.product-image {
+  width: 300px;  /* Aumentando o tamanho da imagem */
+  height: 200px; /* Aumentando a altura da imagem */
+}
 
-  .category-btn {
-    padding: 12px;
-    font-size: 0.9rem;
-  }
+.cart-button {
+  width: 80px;  /* Aumentando o tamanho do carrinho */
+  height: 80px;
+}
 
-  .product-card {
-    padding: 12px;
-    border-radius: 18px;
-  }
-
-  .product-image-area {
-    height: 130px;
-    margin-bottom: 12px;
-  }
-
-  .product-image {
-    width: 150px;
-    height: 115px;
-  }
-
-  .product-card h3 {
-    font-size: 0.9rem;
-  }
-
-  .price {
-    font-size: 0.85rem;
-  }
-
-  .confirm-button {
-    padding: 14px 18px;
-    font-size: 0.95rem;
-    border-radius: 16px;
-  }
+.cart-button img {
+  width: 100px;  /* Aumentando o tamanho da imagem do carrinho */
+  height: 70px; /* Aumentando a altura da imagem do carrinho */
 }
